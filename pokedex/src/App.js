@@ -1,16 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { limit, item } from './api';
+import { Cards } from './components/Cards/Cards';
+import { Details } from './components/Details/Details';
 
-function App() {
+import './App.scss';
+
+
+export const App = () => {
+  // console.log(limit);
+  // console.log(item);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>My own React</p>
-        
-      </header>
+      <h1 className="App__title">Pokedex</h1>
+      
+      <main className="App__main">
+        <Cards />
+        <Details />
+      </main>
+
     </div>
   );
 }
-
-export default App;
