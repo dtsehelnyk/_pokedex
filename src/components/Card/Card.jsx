@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import classNames from 'classnames';
 
+import { Context } from '../../context';
 import { getData } from '../../api';
 
 import './Card.scss';
 
 export const Card = ({ url, name, index }) => {
-
   const [ currentAbilities, setAbilities ] = useState([]);
+  const [ currentPokemon, setPokemon ] = useState([]);
+
+  const { handleCard } = useContext(Context);
 
   const getAbilities = async () => {
     const pokemonFromServer = await getData(url);
 
+    setPokemon(pokemonFromServer);
     setAbilities(pokemonFromServer.abilities);
   };
 
@@ -22,6 +26,7 @@ export const Card = ({ url, name, index }) => {
   return (
     <div className="Card">
       <img
+        onClick={() => handleCard(currentPokemon)}
         className="Card__image"
         src={`https://pokeres.bastionbot.org/images/pokemon/${index}.png`}
         alt={name}
